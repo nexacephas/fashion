@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import BrandStatement from './components/BrandManifesto/BrandManifesto';
@@ -14,26 +15,28 @@ import './index.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <BrandStatement />
-              <FeaturedProducts />
-              <WorldviewStory />
-              <LookbookPreview />
-              <PickUpListCollection />
-              <SNSNav />
-              <Footer />
-            </>
-          } />
-          <Route path="/products" element={<ProductListPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <BrandStatement />
+                <FeaturedProducts />
+                <WorldviewStory />
+                <LookbookPreview />
+                <PickUpListCollection />
+                <SNSNav />
+                <Footer />
+              </>
+            } />
+            <Route path="/products" element={<ProductListPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }
 

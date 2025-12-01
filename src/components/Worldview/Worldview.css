@@ -1,9 +1,7 @@
-/* WorldviewStory.css */
-
 .worldview-section {
   position: relative;
   width: 100%;
-  min-height: 60vh;
+  min-height: 45vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,13 +21,28 @@
   height: 100%;
   object-fit: cover; /* ensures video covers the section */
   z-index: 1;
-  pointer-events: none; /* prevents video from blocking interactions */
+  pointer-events: none;
 }
 
+/* Text overlay with black background */
 .worldview-text {
   position: relative;
   z-index: 2;
   max-width: 800px;
+  /* semi-opaque panel to increase contrast against video */
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  color: #fff; /* default white text */
+  /* soften the video behind and help legibility */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Variant for light backgrounds: use a light panel and dark text */
+.worldview-section.light .worldview-text {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #0b0b0b;
 }
 
 .fade-in-text {
@@ -38,6 +51,15 @@
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 1s forwards;
+  /* Add subtle stroke and shadow so the text reads on both light and dark areas */
+  -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65), 0 0 8px rgba(0, 0, 0, 0.25);
+}
+
+/* If the section uses the light variant, invert the stroke/shadow to keep contrast */
+.worldview-section.light .fade-in-text {
+  -webkit-text-stroke: 0.45px rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85), 0 0 6px rgba(255, 255, 255, 0.25);
 }
 
 @keyframes fadeInUp {
@@ -49,6 +71,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .worldview-text {
+    padding: 1.5rem 1rem;
+  }
+
   .fade-in-text {
     font-size: 1.2rem;
   }

@@ -1,33 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../context/LanguageContext";
 import "./BrandManifesto.css";
 
 const BrandStatement = () => {
+  const { lang } = useContext(LanguageContext);
   return (
     <section className="brand-statement" id="brand-statement">
+      {/* Intro with animated splashed ink */}
+      <div className="brand-intro">
+        <div className="ink-splash"></div>
+      </div>
+
       <div className="brand-content">
-        <h2 className="brand-title">The Yamato Spirit × Modern Fashion</h2>
+        <h2 className="brand-title">{lang === "en" ? "Yamato Spirit × Modern Fashion" : "大和の精神 × モダンファッション"}</h2>
         <p className="brand-text">
-          Inspired by Japanese tradition and the disciplined elegance of the Yamato Spirit, our
-          designs fuse heritage with contemporary style. Every piece embodies strength,
-          sophistication, and timeless beauty.
+          {lang === "en" ? "Inspired by the disciplined elegance of Japanese tradition and Yamato spirit, our brand's designs fuse heritage with contemporary style. Every creation embodies strength, sophistication, and timeless beauty." : "日本の伝統と大和の精神が持つ規律ある優雅さにインスパイアされた当ブランドのデザインは、遺産と現代スタイルを融合させています。すべての作品は、力強さ、洗練さ、そして時を超えた美しさを体現しています。"}
         </p>
 
-        <div className="brand-icons">
-          <div className="icon-card">
-            <img
-              src="https://images.unsplash.com/photo-1619983087453-3d3cba765c84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=200"
-              alt="Gold Brush Stroke"
-            />
-            <p>Gold brushstroke accent</p>
-          </div>
-          <div className="icon-card">
-            <img
-              src="https://images.unsplash.com/photo-1544986581-efac024faf62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-4.0.3&q=80&w=200"
-              alt="Samurai Silhouette"
-            />
-            <p>Discipline & Strength</p>
-          </div>
-        </div>
       </div>
     </section>
   );

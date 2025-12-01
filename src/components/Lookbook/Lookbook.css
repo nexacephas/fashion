@@ -29,8 +29,8 @@
 .video-wrapper {
   position: relative;
   width: 100%;
-  max-width: 300px; /* uniform max width */
-  height: 200px; /* fixed height for all videos */
+  max-width: 260px; /* uniform max width (reduced) */
+  height: 150px; /* fixed height for all videos (reduced) */
   overflow: hidden;
   border-radius: 12px;
 }

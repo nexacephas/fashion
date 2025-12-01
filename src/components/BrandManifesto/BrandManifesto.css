@@ -1,81 +1,78 @@
 .brand-statement {
-  padding: 120px 40px;
-  background-color: #0a0a0a;
-  color: #fff;
+  position: relative;
+  padding: 4rem 2rem;
+  color: #111;
   text-align: center;
-  font-family: "Noto Sans JP", sans-serif;
+
+  /* Background image only */
+  background-image: url('../../assets/images/ink-texture.png'); /* path to your splashed ink image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Optional: subtle overlay for readability */
+  background-color: rgba(255, 255, 255, 0.8);
+  background-blend-mode: lighten;
+}
+
+.brand-intro {
+  margin-bottom: 2rem;
+}
+
+.intro-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Yuji Syuku", serif;
+  background-color: rgba(255, 255, 255, 0.8); /* slightly lighter to improve readability */
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  line-height: 1.4;
 }
 
 .brand-title {
-  font-family: "Noto Serif JP", serif;
-  font-size: 3rem;
-  letter-spacing: 4px;
-  color: gold;
-  margin-bottom: 20px;
-  animation: fadeSlide 1s ease forwards;
-  opacity: 0;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 .brand-text {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.6;
   max-width: 700px;
-  margin: 0 auto 50px;
-  line-height: 1.8;
-  opacity: 0;
-  animation: fadeSlide 1s ease forwards;
-  animation-delay: 0.5s;
+  margin: 0 auto 2rem auto;
 }
 
 .brand-icons {
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 2rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 .icon-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 150px;
   text-align: center;
-  opacity: 0;
-  animation: fadeSlide 1s ease forwards;
+  max-width: 200px;
 }
 
 .icon-card img {
-  width: 60px;
-  margin-bottom: 15px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .icon-card p {
-  font-size: 0.95rem;
-  color: rgba(255, 215, 0, 0.9);
-}
-
-/* Animation */
-@keyframes fadeSlide {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  font-size: 0.9rem;
+  color: #444;
+  font-weight: 500;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .brand-title {
-    font-size: 2.2rem;
-  }
-  .brand-text {
-    font-size: 1rem;
-    padding: 0 20px;
-  }
-  .brand-icons {
-    gap: 30px;
-  }
+  .intro-text { font-size: 1.2rem; }
+  .brand-title { font-size: 1.5rem; }
+  .brand-text { font-size: 0.9rem; }
+  .brand-icons { gap: 1rem; }
 }

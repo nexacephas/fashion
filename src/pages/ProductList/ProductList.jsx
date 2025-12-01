@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { LanguageContext } from "../../context/LanguageContext";
 import "./ProductList.css";
 
-const products = [
-  { id: 1, name: "Product 1", img: "/assets/products/product1.jpg", price: "$120" },
-  { id: 2, name: "Product 2", img: "/assets/products/product2.jpg", price: "$150" },
-  { id: 3, name: "Product 3", img: "/assets/products/product3.jpg", price: "$100" },
-  { id: 4, name: "Product 4", img: "/assets/products/product4.jpg", price: "$180" },
-  { id: 5, name: "Product 5", img: "/assets/products/product5.jpg", price: "$90" },
-  { id: 6, name: "Product 6", img: "/assets/products/product6.jpg", price: "$200" },
-  // add more as needed
-];
+// Dynamic import all product images using Vite's import.meta.glob
+const imageModules = import.meta.glob("../../assets/images/product*.jpg", { eager: true });
+
+// Generate products array from all product images
+const generateProducts = () => {
+  const productList = Object.entries(imageModules).map(([path, module], idx) => {
+    const fileName = path.split("/").pop().replace(".jpg", "");
+    return {
+      id: idx + 1,
+      name: fileName.charAt(0).toUpperCase() + fileName.slice(1).replace(/([A-Z])/g, " $1"),
+      img: module.default,
+      price: `$${Math.floor(Math.random() * 250) + 50}`,
+    };
+  });
+  return productList.sort((a, b) => {
+    const numA = parseInt(a.name.match(/\d+/)?.[0] || 0);
+    const numB = parseInt(b.name.match(/\d+/)?.[0] || 0);
+    return numA - numB;
+  });
+};
+
+const products = generateProducts();
 
 const ProductListPage = () => {
-  const itemsPerPage = 6;
+  const { lang } = useContext(LanguageContext);
+  const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
@@ -46,13 +61,13 @@ const ProductListPage = () => {
 
       <div className="pagination">
         <button onClick={handlePrev} disabled={currentPage === 1}>
-          Prev
+          {lang === "en" ? "Prev" : "戻る"}
         </button>
         <span>
           {currentPage} / {totalPages}
         </span>
         <button onClick={handleNext} disabled={currentPage === totalPages}>
-          Next
+          {lang === "en" ? "Next" : "次へ"}
         </button>
       </div>
     </section>
