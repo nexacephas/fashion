@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./PickUpCollection.css";
 import { Link } from "react-router-dom";
 import product1 from "../../assets/images/product1.jpg";
@@ -7,6 +7,8 @@ import product3 from "../../assets/images/product3.jpg";
 import product4 from "../../assets/images/product4.jpg";
 import product5 from "../../assets/images/product5.jpg";
 import product6 from "../../assets/images/product6.jpg";
+
+import { LanguageContext } from "../../context/LanguageContext";
 
 const products = [
   { id: 1, name: "Product 1", img: product1, link: "/products/1" },
@@ -18,26 +20,32 @@ const products = [
 ];
 
 const ProductList = () => {
+  const { lang } = useContext(LanguageContext);
   return (
     <section className="product-list-section">
       {/* Heading */}
-      <h2 className="product-list-title">Pick Up Collection</h2>
+      <h2 className="product-list-title">{lang === "en" ? "Pick Up Collection" : "ピックアップコレクション"}</h2>
 
       <div className="product-grid">
-        {products.map((product) => (
-          <Link key={product.id} to={product.link} className="product-card">
-            <div className="image-wrapper">
-              <img src={product.img} alt={product.name} />
-              <div className="hover-frame"></div>
-            </div>
-            <p className="product-name">{product.name}</p>
-          </Link>
-        ))}
+        {products.map((product) => {
+          // Extract number from product name (e.g., "Product 1")
+          const match = product.name.match(/(Product|商品)?\s*(\d+)/i);
+          const num = match ? match[2] : product.id;
+          return (
+            <Link key={product.id} to={product.link} className="product-card">
+              <div className="image-wrapper">
+                <img src={product.img} alt={product.name} />
+                <div className="hover-frame"></div>
+              </div>
+              <p className="product-name">{lang === "jp" ? `商品 ${num}` : `Product ${num}`}</p>
+            </Link>
+          );
+        })}
       </div>
 
       <div className="view-all-wrapper">
         <Link to="/products" className="view-all-btn">
-          View All Products
+          {lang === "en" ? "View All Products" : "全商品を見る"}
         </Link>
       </div>
     </section>

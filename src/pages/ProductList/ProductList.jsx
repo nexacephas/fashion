@@ -53,7 +53,17 @@ const ProductListPage = () => {
               <img src={product.img} alt={product.name} />
               <div className="hover-frame"></div>
             </div>
-            <p className="product-name">{product.name}</p>
+            <p className="product-name">
+              {(() => {
+                // Extract number from product name (e.g., "Product 1")
+                const match = product.name.match(/(Product|商品)?\s*(\d+)/i);
+                if (match) {
+                  const num = match[2];
+                  return lang === "jp" ? `商品 ${num}` : `Product ${num}`;
+                }
+                return product.name;
+              })()}
+            </p>
             <p className="product-price">{product.price}</p>
           </div>
         ))}

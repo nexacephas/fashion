@@ -24,6 +24,20 @@
   transform: scale(1.2);
 }
 
+/* Non-clickable placeholder icon when links are empty */
+.sns-icon {
+  color: gold;
+  font-size: 1.8rem;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+.sns-icon.disabled {
+  color: #cfcfcf;
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .sns-nav a {
