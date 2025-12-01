@@ -1,0 +1,35 @@
+.sns-nav {
+  background-color: #000;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.sns-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.sns-nav a {
+  color: gold;
+  font-size: 1.8rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.sns-nav a:hover {
+  color: #ffd700;
+  transform: scale(1.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sns-nav a {
+    font-size: 1.5rem;
+  }
+  .sns-nav ul {
+    gap: 1.5rem;
+  }
+}
