@@ -1,6 +1,6 @@
 .full-product-page {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-base);
+  color: var(--color-white);
   padding: 5rem 2rem;
   min-height: 100vh;
   text-align: center;
@@ -14,7 +14,7 @@
 .gold-line {
   width: 100px;
   height: 2px;
-  background-color: gold;
+  background-color: var(--color-gold);
   margin: 0 auto 3rem auto;
 }
 
@@ -44,7 +44,7 @@
 .image-wrapper img {
   width: 100%;
   display: block;
-  filter: brightness(0.85); /* darken image for aesthetic consistency */
+  filter: brightness(0.85) saturate(0.95); /* darken image for aesthetic consistency */
 }
 
 .hover-frame {
@@ -53,7 +53,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid gold;
+  border: 2px solid var(--color-gold);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -61,6 +61,11 @@
 .product-card:hover .hover-frame {
   opacity: 1;
   animation: flashFade 1s forwards;
+}
+
+.product-card:hover img {
+  filter: brightness(1) saturate(1.12);
+  transition: filter 220ms ease, transform 300ms ease;
 }
 
 @keyframes flashFade {
@@ -74,7 +79,7 @@
 }
 
 .product-price {
-  color: #FFD700; /* light gold */
+  color: var(--color-gold); /* accent gold */
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -89,8 +94,8 @@
 }
 
 .pagination button {
-  background-color: gold;
-  color: #000;
+  background-color: var(--color-gold);
+  color: var(--color-base);
   padding: 0.5rem 1rem;
   border: none;
   font-weight: bold;

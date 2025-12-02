@@ -2,8 +2,8 @@
 
 .featured-products {
   padding: 4rem 2rem;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-base);
+  color: var(--color-white);
   text-align: center;
   position: relative;
 }
@@ -19,15 +19,15 @@
 
 .section-title {
   font-size: 2rem;
-  color: #FFD700; /* gold accent */
+  color: var(--color-gold); /* gold accent */
   margin: 0;
   text-align: left;
 }
 
 .lang-toggle {
   padding: 0.5rem 1rem;
-  background-color: #FFD700;
-  color: #000;
+  background-color: var(--color-gold);
+  color: var(--color-base);
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -37,7 +37,7 @@
 
 .lang-toggle:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 4px 10px rgba(212, 178, 126, 0.5);
 }
 
 .products-slider {
@@ -46,7 +46,7 @@
 }
 
 .product-card {
-  background-color: #111;
+  background-color: var(--color-ink);
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
@@ -60,7 +60,7 @@
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 20px gold;
+  box-shadow: 0 0 20px var(--color-gold);
 }
 
 .product-card img {
@@ -71,22 +71,27 @@
   margin-bottom: 1rem;
 }
 
+.product-card:hover img {
+  filter: brightness(1) saturate(1.12);
+  transform: scale(1.02);
+}
+
 .product-info h3 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .product-info p {
   font-size: 1rem;
-  color: #FFD700;
+  color: var(--color-gold);
   margin: 0.3rem 0 1rem 0;
 }
 
 .buy-btn {
   padding: 0.6rem 1.5rem;
-  background-color: #FFD700;
-  color: #000;
+  background-color: var(--color-gold);
+  color: var(--color-base);
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -96,7 +101,7 @@
 
 .buy-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+  box-shadow: 0 4px 15px rgba(212, 178, 126, 0.6);
 }
 /* Mobile adjustments */
 @media (max-width: 768px) {
@@ -125,7 +130,7 @@
     padding: 0.8rem;
     border-radius: 8px;
     margin: 0 auto;
-    background-color: #0a0a0a;
+    background-color: var(--color-base);
   }
 
   .product-card img {
@@ -189,8 +194,8 @@
 
   .product-card {
     padding: 0.6rem;
-    background-color: #0a0a0a;
-    border: 1px solid #1a1a1a;
+    background-color: var(--color-base);
+    border: 1px solid var(--color-ink);
   }
 
   .product-card img {
@@ -225,6 +230,6 @@
 
   .slick-dots li button:before {
     font-size: 7px;
-    color: #FFD700;
+    color: var(--color-gold);
   }
 }

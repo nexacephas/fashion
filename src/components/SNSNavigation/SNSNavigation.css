@@ -1,5 +1,5 @@
 .sns-nav {
-  background-color: #000;
+  background-color: var(--color-base);
   padding: 1rem 2rem;
   text-align: center;
 }
@@ -14,19 +14,19 @@
 }
 
 .sns-nav a {
-  color: gold;
+  color: var(--color-gold);
   font-size: 1.8rem;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .sns-nav a:hover {
-  color: #ffd700;
+  color: var(--color-gold);
   transform: scale(1.2);
 }
 
 /* Non-clickable placeholder icon when links are empty */
 .sns-icon {
-  color: gold;
+  color: var(--color-gold);
   font-size: 1.8rem;
   display: inline-block;
   transition: opacity 0.2s ease;

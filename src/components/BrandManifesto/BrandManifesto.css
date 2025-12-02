@@ -1,78 +1,72 @@
+/* Brand Manifesto Section */
 .brand-statement {
   position: relative;
-  padding: 4rem 2rem;
-  color: #111;
+  padding: 5rem 2rem;
+  color: var(--color-white);
   text-align: center;
-
-  /* Background image only */
-  background-image: url('../../assets/images/ink-texture.png'); /* path to your splashed ink image */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* Optional: subtle overlay for readability */
-  background-color: rgba(255, 255, 255, 0.8);
-  background-blend-mode: lighten;
+  background-color: var(--color-ink);
+  background-image: radial-gradient(circle at 20% 80%, rgba(212, 178, 126, 0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(212, 178, 126, 0.05) 0%, transparent 40%);
+  overflow: hidden;
 }
 
 .brand-intro {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
-.intro-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  font-family: "Yuji Syuku", serif;
-  background-color: rgba(255, 255, 255, 0.8); /* slightly lighter to improve readability */
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  line-height: 1.4;
+.ink-splash {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(212, 178, 126, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(8px);
 }
 
-.brand-title {
-  font-size: 2rem;
+.brand-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.brand-manifesto {
+  font-family: var(--font-logo);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-gold);
   margin-bottom: 1rem;
-  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.brand-text {
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto 2rem auto;
-}
-
-.brand-icons {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.icon-card {
-  text-align: center;
-  max-width: 200px;
-}
-
-.icon-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-}
-
-.icon-card p {
-  font-size: 0.9rem;
-  color: #444;
-  font-weight: 500;
+.brand-manifesto-sub {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  color: var(--color-white);
+  line-height: 1.8;
+  letter-spacing: 1px;
+  font-weight: 300;
+  opacity: 0.95;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .intro-text { font-size: 1.2rem; }
-  .brand-title { font-size: 1.5rem; }
-  .brand-text { font-size: 0.9rem; }
-  .brand-icons { gap: 1rem; }
+  .brand-statement {
+    padding: 3rem 1.5rem;
+  }
+
+  .brand-manifesto {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .brand-manifesto-sub {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
 }

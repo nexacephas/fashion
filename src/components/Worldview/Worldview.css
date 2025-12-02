@@ -6,10 +6,10 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #FAFAFA;
+  color: var(--color-white);
   overflow: hidden;
   padding: 4rem 2rem;
-  background-color: #000; /* fallback */
+  background-color: var(--color-base); /* fallback */
 }
 
 /* Video background */
@@ -30,10 +30,10 @@
   z-index: 2;
   max-width: 800px;
   /* semi-opaque panel to increase contrast against video */
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(10, 10, 10, 0.55);
   padding: 2rem 1.5rem;
   border-radius: 12px;
-  color: #fff; /* default white text */
+  color: var(--color-white); /* default white text */
   /* soften the video behind and help legibility */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -42,7 +42,7 @@
 /* Variant for light backgrounds: use a light panel and dark text */
 .worldview-section.light .worldview-text {
   background-color: rgba(255, 255, 255, 0.85);
-  color: #0b0b0b;
+  color: var(--color-ink);
 }
 
 .fade-in-text {

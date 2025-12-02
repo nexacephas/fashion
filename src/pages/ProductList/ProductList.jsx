@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "./ProductList.css";
 
@@ -30,6 +30,11 @@ const ProductListPage = () => {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));

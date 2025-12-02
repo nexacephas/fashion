@@ -6,8 +6,8 @@
   left: 0;
   z-index: 50;
   backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, 0.25);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 10, 0.25);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.06);
   padding: 18px 0;
   animation: fadeDown 0.8s ease forwards;
   opacity: 0;
@@ -25,11 +25,22 @@
 
 /* Logo */
 .logo {
-  font-family: "Noto Serif JP", serif;
+  font-family: var(--font-logo);
   font-size: 1.9rem;
   letter-spacing: 3px;
-  color: white;
+  color: var(--color-white);
   font-weight: 600;
+}
+
+/* Logo reveal: fade + slight zoom */
+.logo-img {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+.logo-img.revealed {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Navigation Links */
@@ -40,7 +51,7 @@
 }
 
 .nav-links li a {
-  color: white;
+  color: var(--color-white);
   font-size: 0.95rem;
   letter-spacing: 2px;
   text-decoration: none;

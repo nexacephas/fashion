@@ -42,7 +42,7 @@ const FeaturedProducts = () => {
 const settings = {
   dots: true,
   infinite: true,
-  speed: 700,
+  speed: 300,
   slidesToShow: 3, // default desktop
   slidesToScroll: 1,
   responsive: [

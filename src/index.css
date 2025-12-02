@@ -1,4 +1,15 @@
 /* RESET */
+:root {
+  /* Design system variables */
+  --color-base: #0A0A0A; /* deep black base */
+  --color-ink: #1A1A1A; /* textured/ink surface */
+  --color-gold: #D4B27E; /* accent gold (alternate) */
+  --color-white: #FAFAFA; /* primary text white */
+  --font-sans: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-logo: 'Satisfy', 'Noto Serif JP', serif;
+  --motion-duration: 600ms;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,10 +17,90 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background: #fff;
-  color: #111;
+  font-family: var(--font-sans);
+  background: var(--color-base);
+  color: var(--color-white);
   line-height: 1.5;
+}
+
+/* Global fade-in animation for initial page load */
+@keyframes fadeInInitial {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in to major sections */
+section {
+  animation: fadeInInitial 0.8s ease forwards;
+}
+
+section:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+section:nth-of-type(2) {
+  animation-delay: 0.1s;
+}
+
+section:nth-of-type(3) {
+  animation-delay: 0.2s;
+}
+
+section:nth-of-type(n+4) {
+  animation-delay: 0.3s;
+}
+
+/* Global reveal animation for scroll/entry */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--motion-duration) ease, transform var(--motion-duration) ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade-in utility class */
+.fade-in {
+  animation: fadeInInitial 0.8s ease forwards;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Utility to add stagger via inline style: style={{ transitionDelay: '200ms' }} */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-duration: 0ms; }
+  .reveal { transition: none; transform: none; }
+  section { animation: none; }
+  * { animation-duration: 0ms !important; animation-delay: 0ms !important; }
+}
+
+/* Mobile: limit motion and shadows */
+@media (max-width: 576px) {
+  :root { --motion-duration: 300ms; }
+  .hero-title, .hero-subtitle { font-size: 1.6rem; }
+  .reveal { transform: none; }
+  .product-card:hover .hover-frame, .product-card:hover { box-shadow: none; }
 }
 
 /* Utility classes */
