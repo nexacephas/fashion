@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar/Navbar';
-/* import KatanaLoader from './components/KatanaLoader/KatanaLoader'; */
+import KatanaLoader from './components/KatanaLoader/KatanaLoader';
 import Hero from './components/Hero/Hero';
 import BrandStatement from './components/BrandManifesto/BrandManifesto';
 import LookbookPreview from './components/Lookbook/Lookbook';
@@ -18,7 +18,7 @@ function App() {
   return (
     <LanguageProvider>
       <Router>
-{/*         <KatanaLoader /> */}
+        <KatanaLoader />
         <div className="App">
           <Navbar />
           <Routes>

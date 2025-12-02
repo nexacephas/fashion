@@ -8,22 +8,82 @@
   z-index: 9999;
 }
 
-.katana-fallback {
-  width: 320px;
-  height: 320px;
+.katana-svg-wrap {
+  width: 360px;
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* total intro duration: 2000ms (2s) */
+  animation: loaderComplete 2000ms ease forwards, rotateSlash 2000ms cubic-bezier(.2,.9,.2,1) forwards;
+  transform-origin: center center;
 }
 
-.slash-visual {
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-  transform: translateX(-120%);
-  animation: slashMove 750ms ease forwards;
+.katana-svg {
+  width: 260px;
+  height: 260px;
+  overflow: visible;
 }
 
-@keyframes slashMove {
-  to { transform: translateX(120%); }
+.katana-svg, .katana-svg-wrap {
+  transform-origin: center center;
+}
+
+.katana-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  stroke-width: 12;
+  /* draw the main slash over ~1.4s for a sweeping effect */
+  animation: drawSlash 1400ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+.katana-glow {
+  opacity: 0;
+  stroke-width: 26;
+  /* glow appears slightly after the path starts, remains through the slash */
+  animation: glowIn 1400ms ease 120ms forwards;
+}
+
+.katana-flash {
+  opacity: 0;
+  transform-origin: center;
+  /* quick flash that sweeps near the end of the slash */
+  animation: flashMove 600ms ease 1300ms forwards;
+}
+
+@keyframes drawSlash {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes glowIn {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+@keyframes flashMove {
+  0% { transform: translateX(-250px) rotate(-10deg); opacity: 1; }
+  100% { transform: translateX(520px) rotate(-10deg); opacity: 0; }
+}
+
+/* wrapper complete - end of entire loader */
+@keyframes loaderComplete {
+  0% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes rotateSlash {
+  0% { transform: rotate(-25deg) scale(1); }
+  40% { transform: rotate(12deg) scale(1.02); }
+  70% { transform: rotate(6deg) scale(1.01); }
+  100% { transform: rotate(6deg) scale(1); }
+}
+
+/* Reduced motion: skip animations */
+@media (prefers-reduced-motion: reduce) {
+  .katana-path, .katana-glow, .katana-flash, .katana-svg-wrap {
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }
