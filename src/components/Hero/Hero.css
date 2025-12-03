@@ -257,39 +257,36 @@
 }
 
 /* Gold shimmer on title */
+/* Gold shimmer flowing through text */
+/* Hero Title with Gold Flow */
+
 .hero-title {
-  position: relative;
   font-family: "Noto Serif JP", serif;
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #fff;
+  background: linear-gradient(
+    90deg,
+    #d4b27e 20%,
+    #ffffff 40%,
+    #d4b27e 60%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; /* text takes gradient color */
+  animation: goldFlow 2s linear infinite;
+  position: relative;
   overflow: hidden;
 }
 
-.hero-title::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(212, 178, 126, 0) 0%,
-    rgba(212, 178, 126, 0.7) 50%,
-    rgba(212, 178, 126, 0) 100%
-  );
-  transform: skewX(-20deg);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
+/* Gold flow animation */
+@keyframes goldFlow {
   0% {
-    left: -75%;
+    background-position: -200% 0;
   }
   100% {
-    left: 125%;
+    background-position: 200% 0;
   }
 }
 /* Subtitle animation */

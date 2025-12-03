@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "./Footer.css";
-import logo from "../../assets/images/lollllllllll.png"; // replace with your small logo
+import logo from "../../assets/images/WhatsApp_Image_2025-12-03_at_03.21.58_68c1f83b-removebg-preview.png"; // replace with your small logo
 
 const Footer = () => {
   const { lang } = useContext(LanguageContext);

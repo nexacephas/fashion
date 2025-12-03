@@ -1,89 +1,99 @@
+/* Assume --color-gold is defined somewhere, e.g., --color-gold: #ffc72c; */
+:root {
+  --color-gold: #ffc72c;
+  --animation-duration: 3.0s; /* 🚩 FIX: Set Total duration to 1.0s */
+  --cut-time: 0.8s; /* uration of the initial slashDraw */
+}
+
 .katana-loader {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
+  background: rgba(0, 0, 0, 0.95);
   z-index: 9999;
 }
 
-.katana-svg-wrap {
-  width: 360px;
-  height: 360px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* total intro duration: 2000ms (2s) */
-  animation: loaderComplete 2000ms ease forwards, rotateSlash 2000ms cubic-bezier(.2,.9,.2,1) forwards;
-  transform-origin: center center;
-}
-
 .katana-svg {
-  width: 260px;
-  height: 260px;
-  overflow: visible;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.katana-svg, .katana-svg-wrap {
-  transform-origin: center center;
+/* The glowing trail (wider stroke, uses the blur filter) */
+.katana-trail {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  
+  animation: 
+    /* The Cut: 0.3s duration, no delay */
+    slashDraw var(--cut-time) cubic-bezier(0.25, 0.8, 0.25, 1) forwards,
+    
+    /* Trail Swoosh: Must last (1.0s - 0.3s) = 0.7s total */
+    trailSwoosh 0.7s cubic-bezier(0.1, 0.9, 0.2, 1) var(--cut-time) forwards;
 }
 
-.katana-path {
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  stroke-width: 12;
-  /* draw the main slash over ~1.4s for a sweeping effect */
-  animation: drawSlash 1400ms cubic-bezier(.2,.9,.2,1) forwards;
+/* The main blade (thinner stroke, uses the gold gradient) */
+.katana-blade {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  /* Blade draws quickly (0.3s) and then quickly fades out (0.2s) right after */
+  animation: 
+    slashDraw var(--cut-time) cubic-bezier(0.25, 0.8, 0.25, 1) forwards,
+    bladeFade 0.2s ease-out var(--cut-time) forwards;
 }
 
-.katana-glow {
-  opacity: 0;
-  stroke-width: 26;
-  /* glow appears slightly after the path starts, remains through the slash */
-  animation: glowIn 1400ms ease 120ms forwards;
-}
+/* --- KEYFRAMES --- (Remain the same, as they define *how* the animation moves) */
 
-.katana-flash {
-  opacity: 0;
-  transform-origin: center;
-  /* quick flash that sweeps near the end of the slash */
-  animation: flashMove 600ms ease 1300ms forwards;
-}
-
-@keyframes drawSlash {
+/* 1. Draw the entire path quickly (The initial "cut" of the blade) */
+@keyframes slashDraw {
   to { stroke-dashoffset: 0; }
 }
 
-@keyframes glowIn {
+/* 2. Fade and distort the glowing trail */
+@keyframes trailSwoosh {
+  0% { 
+    opacity: 1; 
+    stroke-width: 20; 
+    transform: none; 
+  }
+  50% { 
+    opacity: 0.8; 
+    stroke-width: 5;
+  }
+  100% { 
+    opacity: 0; 
+    stroke-dashoffset: -600;
+    transform: scale(1.05);
+  }
+}
+
+/* 3. The main blade disappears quickly after the slash */
+@keyframes bladeFade {
+  to { opacity: 0; }
+}
+
+/* Optional: Subtle screen impact */
+.katana-loader:after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.08);
+  /* Triggers and quickly fades immediately after the cut (0.3s delay) */
+  animation: flashImpact 0.4s ease var(--cut-time) forwards;
+}
+
+@keyframes flashImpact {
   0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0.85; }
-}
-
-@keyframes flashMove {
-  0% { transform: translateX(-250px) rotate(-10deg); opacity: 1; }
-  100% { transform: translateX(520px) rotate(-10deg); opacity: 0; }
-}
-
-/* wrapper complete - end of entire loader */
-@keyframes loaderComplete {
-  0% { opacity: 1; }
-  85% { opacity: 1; }
+  25% { opacity: 0.08; }
   100% { opacity: 0; }
 }
 
-@keyframes rotateSlash {
-  0% { transform: rotate(-25deg) scale(1); }
-  40% { transform: rotate(12deg) scale(1.02); }
-  70% { transform: rotate(6deg) scale(1.01); }
-  100% { transform: rotate(6deg) scale(1); }
-}
-
-/* Reduced motion: skip animations */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .katana-path, .katana-glow, .katana-flash, .katana-svg-wrap {
+  .katana-trail, .katana-blade, .katana-loader:after {
     animation: none !important;
-    opacity: 1 !important;
+    opacity: 0 !important;
   }
 }
