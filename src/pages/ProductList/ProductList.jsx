@@ -3,7 +3,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 import "./ProductList.css";
 
 // Dynamic import all product images using Vite's import.meta.glob
-const imageModules = import.meta.glob("../../assets/images/product*.jpg", { eager: true });
+const imageModules = import.meta.glob("../../assets/images/product*.{png,jpg,jpeg}", { eager: true });
 
 // Generate products array from all product images
 const generateProducts = () => {

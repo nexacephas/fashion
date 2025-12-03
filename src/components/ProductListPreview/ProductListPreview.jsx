@@ -5,9 +5,9 @@ import "./ProductListPreview.css";
 import SliderModule from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import product1 from "../../assets/images/product1.jpg";
-import product2 from "../../assets/images/product2.jpg";
-import product3 from "../../assets/images/product3.jpg";
+import product1 from "../../assets/images/product3.png";
+import product2 from "../../assets/images/product2.png";
+import product3 from "../../assets/images/product3.png";
 import product4 from "../../assets/images/product4.jpg";
 
 const Slider = SliderModule.default || SliderModule;

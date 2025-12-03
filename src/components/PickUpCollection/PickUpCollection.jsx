@@ -1,12 +1,10 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import "./PickUpCollection.css";
 import { Link } from "react-router-dom";
-import product1 from "../../assets/images/product1.jpg";
-import product2 from "../../assets/images/product2.jpg";
-import product3 from "../../assets/images/product3.jpg";
+import product1 from "../../assets/images/product2.png";
+import product2 from "../../assets/images/product2.png";
+import product3 from "../../assets/images/product3.png";
 import product4 from "../../assets/images/product4.jpg";
-import product5 from "../../assets/images/product5.jpg";
-import product6 from "../../assets/images/product6.jpg";
 
 import { LanguageContext } from "../../context/LanguageContext";
 
@@ -15,8 +13,6 @@ const products = [
   { id: 2, name: "Product 2", img: product2, link: "/products/2" },
   { id: 3, name: "Product 3", img: product3, link: "/products/3" },
   { id: 4, name: "Product 4", img: product4, link: "/products/4" },
-  { id: 5, name: "Product 5", img: product5, link: "/products/5" },
-  { id: 6, name: "Product 6", img: product6, link: "/products/6" },
 ];
 
 const ProductList = () => {
