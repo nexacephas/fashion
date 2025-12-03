@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar/Navbar';
@@ -15,28 +15,48 @@ import ProductListPage from './pages/ProductList/ProductList';
 import './index.css';
 
 function App() {
+  const [loaderDone, setLoaderDone] = useState(false);
+
+  useEffect(() => {
+    const handleComplete = () => setLoaderDone(true);
+
+    window.addEventListener("katana:done", handleComplete);
+
+    return () => {
+      window.removeEventListener("katana:done", handleComplete);
+    };
+  }, []);
+
   return (
     <LanguageProvider>
       <Router>
-        <KatanaLoader />
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Hero />
-                <BrandStatement />
-                <FeaturedProducts />
-                <WorldviewStory />
-                <LookbookPreview />
-                <PickUpListCollection />
-                <SNSNav />
-                <Footer />
-              </>
-            } />
-            <Route path="/products" element={<ProductListPage />} />
-          </Routes>
-        </div>
+        {/* Loader always at the top */}
+        {!loaderDone && <KatanaLoader />}
+
+        {/* Content appears AFTER loader */}
+        {loaderDone && (
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Hero />
+                    <BrandStatement />
+                    <FeaturedProducts />
+                    <WorldviewStory />
+                    <LookbookPreview />
+                    <PickUpListCollection />
+                    <SNSNav />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route path="/products" element={<ProductListPage />} />
+            </Routes>
+          </div>
+        )}
       </Router>
     </LanguageProvider>
   );

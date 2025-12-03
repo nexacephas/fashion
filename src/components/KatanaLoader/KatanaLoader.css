@@ -1,99 +1,54 @@
-/* Assume --color-gold is defined somewhere, e.g., --color-gold: #ffc72c; */
-:root {
-  --color-gold: #ffc72c;
-  --animation-duration: 3.0s; /* 🚩 FIX: Set Total duration to 1.0s */
-  --cut-time: 0.8s; /* uration of the initial slashDraw */
-}
-
 .katana-loader {
   position: fixed;
   inset: 0;
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.95);
   z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
-.katana-svg {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+/* Initial fade-in */
+.katana-loader.fade-in {
+  opacity: 1;
 }
 
-/* The glowing trail (wider stroke, uses the blur filter) */
-.katana-trail {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  
-  animation: 
-    /* The Cut: 0.3s duration, no delay */
-    slashDraw var(--cut-time) cubic-bezier(0.25, 0.8, 0.25, 1) forwards,
-    
-    /* Trail Swoosh: Must last (1.0s - 0.3s) = 0.7s total */
-    trailSwoosh 0.7s cubic-bezier(0.1, 0.9, 0.2, 1) var(--cut-time) forwards;
+/* Smooth fade-out dissolve to website */
+.katana-loader.fade-out {
+  opacity: 0;
 }
 
-/* The main blade (thinner stroke, uses the gold gradient) */
-.katana-blade {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  /* Blade draws quickly (0.3s) and then quickly fades out (0.2s) right after */
-  animation: 
-    slashDraw var(--cut-time) cubic-bezier(0.25, 0.8, 0.25, 1) forwards,
-    bladeFade 0.2s ease-out var(--cut-time) forwards;
+/* Video fills safely */
+.katana-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;     /* full screen width */
+  height: 100vh;    /* full screen height */
+  object-fit: cover; /* VIDEO COVERS THE SCREEN */
 }
 
-/* --- KEYFRAMES --- (Remain the same, as they define *how* the animation moves) */
 
-/* 1. Draw the entire path quickly (The initial "cut" of the blade) */
-@keyframes slashDraw {
-  to { stroke-dashoffset: 0; }
-}
-
-/* 2. Fade and distort the glowing trail */
-@keyframes trailSwoosh {
-  0% { 
-    opacity: 1; 
-    stroke-width: 20; 
-    transform: none; 
-  }
-  50% { 
-    opacity: 0.8; 
-    stroke-width: 5;
-  }
-  100% { 
-    opacity: 0; 
-    stroke-dashoffset: -600;
-    transform: scale(1.05);
-  }
-}
-
-/* 3. The main blade disappears quickly after the slash */
-@keyframes bladeFade {
-  to { opacity: 0; }
-}
-
-/* Optional: Subtle screen impact */
-.katana-loader:after {
-  content: '';
-  position: fixed;
+/* Flash impact overlay */
+.katana-flash {
+  position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.08);
-  /* Triggers and quickly fades immediately after the cut (0.3s delay) */
-  animation: flashImpact 0.4s ease var(--cut-time) forwards;
+  background: rgba(255, 255, 255, 0.9);
+  animation: flashPulse 0.25s ease-out forwards;
+  pointer-events: none;
 }
 
-@keyframes flashImpact {
+@keyframes flashPulse {
   0% { opacity: 0; }
-  25% { opacity: 0.08; }
+  40% { opacity: 1; }
   100% { opacity: 0; }
 }
 
-/* Reduced motion */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .katana-trail, .katana-blade, .katana-loader:after {
-    animation: none !important;
-    opacity: 0 !important;
+  .katana-video, .katana-flash {
+    display: none;
   }
 }
